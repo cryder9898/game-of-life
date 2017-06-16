@@ -8,17 +8,11 @@ class App extends Component {
     }
   }
 
-  change = () => {
-    const newState = this.state.name;
-    newState.first = 'bob';
-    this.setState({name: newState});
-  }
-
   render() {
     return (
       <div className="app">
         <div className="App-header">
-          <h2>{this.state.name}</h2>
+          <h2>Game of Life</h2>
         </div>
         <button type='submit' onClick={this.change}>click</button>
       </div>
