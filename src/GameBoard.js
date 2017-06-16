@@ -8,7 +8,7 @@ class GameBoard extends Component {
     this.state = {
       board: [],
       col: 20,
-      row: 15,
+      row: 30,
     }
   }
 
@@ -30,14 +30,16 @@ class GameBoard extends Component {
     this.setState({board: board});
   }
 
-
   render() {
     return (
       <div className='board'>
         {this.state.board.map((col, i) => {
           return col.map((row, j) => {
             return (
-              <Cell key={[i, j]}/>
+              <Cell
+                key={[i, j]}
+                loc={[i, j]}
+              />
             );
           })
         })}

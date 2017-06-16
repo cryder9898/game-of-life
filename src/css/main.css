@@ -19,7 +19,7 @@ body {
 
 .board {
   margin: 0 auto;
-  width: 240px; }
+  width: 360px; }
 
 .cell {
   float: left;
