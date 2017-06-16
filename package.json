@@ -1,7 +1,7 @@
 {
   "name": "game-of-life",
   "version": "0.1.0",
-  "homepage": "https://cryder9898.github.io/game-of-life/"
+  "homepage": "https://cryder9898.github.io/game-of-life/",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
