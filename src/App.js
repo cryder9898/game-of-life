@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GameBoard from './GameBoard';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class App extends Component {
         <div className="App-header">
           <h2>Game of Life</h2>
         </div>
-        <button type='submit' onClick={this.change}>click</button>
+        <div className='container-fluid'>
+          <GameBoard />
+        </div>
       </div>
     );
   }
