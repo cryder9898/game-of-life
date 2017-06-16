@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameBoard from './GameBoard';
+import TopPanel from './TopPanel';
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +16,8 @@ class App extends Component {
         <div className="App-header">
           <h2>Game of Life</h2>
         </div>
-        <div className='container-fluid'>
-          <GameBoard />
-        </div>
+        <TopPanel />
+        <GameBoard />
       </div>
     );
   }

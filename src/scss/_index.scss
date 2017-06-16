@@ -1,4 +1,5 @@
 $cell-size: 12px;
+$board-width: 20;
 
 body {
   margin: 0;
@@ -17,9 +18,16 @@ body {
   color: white;
 }
 
+.top-panel {
+  margin: 0 auto;
+  button {
+    margin: 2px;
+  }
+}
+
 .board {
   margin: 0 auto;
-  width: $cell-size * 20;
+  width: $cell-size * $board-width;
 }
 
 .cell {
