@@ -7,8 +7,6 @@ class GameBoard extends Component {
 
     this.state = {
       board: [],
-      col: 20,
-      row: 30,
     }
   }
 
@@ -17,17 +15,35 @@ class GameBoard extends Component {
     this.resetBoard();
   }
 
+  // creates the board
   resetBoard = () => {
+    const cols = 20;  // # of columns
+    const rows = 30;  // # of rows
     let board = [];
-    for (let i = 0; i < this.state.col; i++) {
+    for (let i = 0; i < cols; i++) {
       let row = [];
-      for (let j = 0; j < this.state.row; j++) {
+      for (let j = 0; j < rows; j++) {
         row.push(0);
       }
       board.push(row);
     }
-    console.log(board);
+    
     this.setState({board: board});
+  }
+
+  swap = (css, loc) => {
+    let board = this.state.board;
+    this.setState(() => {
+      let i = loc[0];
+      let j = loc[1];
+      if (css === 'alive') {
+        board[i][j] = 0;
+      } else {
+        board[i][j] = 1;
+      }
+
+      return {board: board};
+    });
   }
 
   render() {
@@ -39,6 +55,8 @@ class GameBoard extends Component {
               <Cell
                 key={[i, j]}
                 loc={[i, j]}
+                isAlive={this.state.board[i][j]}
+                swap={this.swap}
               />
             );
           })
