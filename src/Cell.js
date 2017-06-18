@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const Cell = ({loc}) => {
-  const button = () => {
-    console.log(loc);
+const Cell = ({swap, loc, isAlive}) => {
+
+  const handleSwap = (event) => {
+    swap(
+      event.target.className,
+      loc,
+    );
   }
-  return (
-      <div className='cell' onClick={button}>
 
-      </div>
+  return (
+      <div
+        value={loc}
+        className={isAlive ? 'alive' : 'dead'}
+        onClick={handleSwap}
+      />
   );
 }
 

@@ -3,12 +3,6 @@ import GameBoard from './GameBoard';
 import TopPanel from './TopPanel';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'chris',
-    }
-  }
 
   render() {
     return (
