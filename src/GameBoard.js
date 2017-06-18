@@ -10,11 +10,6 @@ class GameBoard extends Component {
     }
   }
 
-  // initializes board
-  componentWillMount() {
-    this.resetBoard();
-  }
-
   // creates the board
   resetBoard = () => {
     const cols = 20;  // # of columns
@@ -27,10 +22,16 @@ class GameBoard extends Component {
       }
       board.push(row);
     }
-    
+
     this.setState({board: board});
   }
 
+  // initializes board
+  componentWillMount() {
+    this.resetBoard();
+  }
+
+  // swap dead and alive cells on board
   swap = (css, loc) => {
     let board = this.state.board;
     this.setState(() => {

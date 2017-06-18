@@ -19,7 +19,8 @@ body {
 }
 
 .top-panel {
-  margin: 0 auto;
+  margin: 5px auto;
+  
   button {
     margin: 2px;
   }
@@ -30,7 +31,7 @@ body {
   width: $cell-size * $board-width;
 }
 
-.dead, .alive {
+.dead {
   float: left;
   height: $cell-size;
   width: $cell-size;
@@ -41,5 +42,6 @@ body {
 }
 
 .alive {
+  @extend .dead;
   background: #008080;
 }

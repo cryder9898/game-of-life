@@ -1,11 +1,14 @@
 import React from 'react';
 
-const TopPanel = (props) => {
+const TopPanel = ({onReset}) => {
+  const handleReset = () => {
+    onReset();
+  }
   return (
     <div className='top-panel'>
       <button>Start</button>
       <button>Pause</button>
-      <button>Reset</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };

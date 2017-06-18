@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Cell = ({swap, loc, isAlive}) => {
 
@@ -16,6 +17,12 @@ const Cell = ({swap, loc, isAlive}) => {
         onClick={handleSwap}
       />
   );
+}
+
+Cell.propTypes = {
+  swap: PropTypes.func.isRequired,
+  loc: PropTypes.array.isRequired,
+  isAlive: PropTypes.number.isRequired,
 }
 
 export default Cell;
