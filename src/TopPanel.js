@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TopPanel = ({}) => {
+const TopPanel = (props) => {
   return (
     <div className='top-panel'>
       <button>Start</button>

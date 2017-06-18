@@ -21,7 +21,7 @@ body {
   margin: 0 auto;
   width: 360px; }
 
-.cell {
+.dead, .alive {
   float: left;
   height: 12px;
   width: 12px;
@@ -29,5 +29,8 @@ body {
   border-width: 1px;
   margin: 0px;
   box-sizing: border-box; }
+
+.alive {
+  background: #008080; }
 
 /*# sourceMappingURL=main.css.map */

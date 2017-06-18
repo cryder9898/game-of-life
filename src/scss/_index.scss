@@ -30,7 +30,7 @@ body {
   width: $cell-size * $board-width;
 }
 
-.cell {
+.dead, .alive {
   float: left;
   height: $cell-size;
   width: $cell-size;
@@ -38,4 +38,8 @@ body {
   border-width: 1px;
   margin: 0px;
   box-sizing: border-box;
+}
+
+.alive {
+  background: #008080;
 }
