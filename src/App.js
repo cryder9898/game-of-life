@@ -36,7 +36,7 @@ class App extends Component {
 
   switchCell = (i, j, state) => {
     let board = this.state.board;
-    
+
     this.setState(() => {
       board[i][j] = state;
       return board;
@@ -50,7 +50,8 @@ class App extends Component {
           <h2>Game of Life</h2>
         </div>
         <TopPanel
-          onReset={this.reset}/>
+          onReset={this.reset}
+        />
         <GameBoard
           switchCell={this.switchCell}
           isRunning={this.state.play}
