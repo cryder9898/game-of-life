@@ -1,4 +1,4 @@
-$cell-size: 12px;
+$cell-size: .7em;
 $board-width: 30;
 
 body {
@@ -20,7 +20,7 @@ body {
 
 .top-panel {
   margin: 5px auto;
-  
+
   button {
     margin: 2px;
   }
@@ -28,7 +28,7 @@ body {
 
 .board {
   margin: 0 auto;
-  width: $cell-size * $board-width;
+  max-width: $cell-size * $board-width;
 }
 
 .dead {

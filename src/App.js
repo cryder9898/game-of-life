@@ -5,7 +5,8 @@ import TopPanel from './TopPanel';
 class App extends Component {
   constructor(props) {
     super(props);
-    let board = this.resetBoard();
+    let board = this.createBoard();
+    this.randomizeLife(board);
     this.state = {
       board: board,
       play: false,
@@ -14,7 +15,7 @@ class App extends Component {
   }
 
   // creates the board
-  resetBoard = () => {
+  createBoard = () => {
     const cols = 20;  // # of columns
     const rows = 30;  // # of rows
     let board = [];
@@ -28,12 +29,18 @@ class App extends Component {
     return board;
   }
 
+  reset = () => {
+    let board = this.createBoard();
+    this.randomizeLife(board);
+    this.setState({board: board});
+  }
+
+  //returns an integer between min and max, excluding max number
   getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
-  randomizeLife = () => {
-    let board = this.state.board;
+  randomizeLife = (board) => {
     const cLen = board.length;
     const rLen = board[0].length;
     for (let i = 0; i < 50; i++) {
@@ -43,13 +50,7 @@ class App extends Component {
       //console.log('Row: ', rows);
       board[cols][rows] = 1;
     }
-   this.setState({board: board});
-  }
-
-  // initializes board
-  componentDidMount() {
-    this.resetBoard();
-    this.randomizeLife();
+    return board;
   }
 
   switchCell = (i, j, state) => {
@@ -64,14 +65,16 @@ class App extends Component {
         <div className="App-header">
           <h2>Game of Life</h2>
         </div>
-        <TopPanel
-          onReset={this.reset}
-        />
-        <GameBoard
-          switchCell={this.switchCell}
-          isRunning={this.state.play}
-          board={this.state.board}
-        />
+        <div>
+          <TopPanel
+            onReset={this.reset}
+          />
+          <GameBoard
+            switchCell={this.switchCell}
+            isRunning={this.state.play}
+            board={this.state.board}
+          />
+        </div>
       </div>
     );
   }
