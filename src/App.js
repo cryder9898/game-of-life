@@ -5,9 +5,9 @@ import TopPanel from './TopPanel';
 class App extends Component {
   constructor(props) {
     super(props);
-
+    let board = this.resetBoard();
     this.state = {
-      board: [],
+      board: board,
       play: false,
       generation: 0,
     }
@@ -25,22 +25,37 @@ class App extends Component {
       }
       board.push(row);
     }
+    return board;
+  }
 
-    this.setState({board: board});
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
+
+  randomizeLife = () => {
+    let board = this.state.board;
+    const cLen = board.length;
+    const rLen = board[0].length;
+    for (let i = 0; i < 50; i++) {
+      let cols = this.getRndInteger(0, cLen);
+      //console.log('Col: ', cols);
+      let rows = this.getRndInteger(0, rLen);
+      //console.log('Row: ', rows);
+      board[cols][rows] = 1;
+    }
+   this.setState({board: board});
   }
 
   // initializes board
-  componentWillMount() {
+  componentDidMount() {
     this.resetBoard();
+    this.randomizeLife();
   }
 
   switchCell = (i, j, state) => {
     let board = this.state.board;
-
-    this.setState(() => {
-      board[i][j] = state;
-      return board;
-    });
+    board[i][j] = state;
+    this.setState({board: board});
   }
 
   render() {

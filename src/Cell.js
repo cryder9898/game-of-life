@@ -8,6 +8,7 @@ const Cell = ({swap, loc, isAlive}) => {
       event.target.className,
       loc,
     );
+    console.log(loc);
   }
 
   return (

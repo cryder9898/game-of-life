@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Cell from './Cell';
 
 const GameBoard = ({switchCell, isRunning, board}) => {
