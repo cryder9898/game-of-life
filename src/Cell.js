@@ -11,11 +11,11 @@ const Cell = ({swap, loc, isAlive}) => {
   }
 
   return (
-      <div
-        value={loc}
-        className={isAlive ? 'alive' : 'dead'}
-        onClick={handleSwap}
-      />
+    <div
+      value={loc}
+      className={isAlive ? 'alive' : 'dead'}
+      onClick={handleSwap}
+    />
   );
 }
 
