@@ -14,7 +14,6 @@ class App extends Component {
     }
   }
 
-  // creates the board
   createBoard = () => {
     const cols = 20;  // # of columns
     const rows = 30;  // # of rows
@@ -32,7 +31,7 @@ class App extends Component {
   reset = () => {
     let board = this.createBoard();
     this.randomizeLife(board);
-    this.setState({board: board});
+    this.setState({board: board, generation: 0});
   }
 
   //returns an integer between min and max, excluding max number
@@ -59,9 +58,32 @@ class App extends Component {
     this.setState({board: board});
   }
 
+  countNeighbors = (row, col) => {
+    let count = 0;
+    let neighbors = [[0,-1],[0,1],[-1,0],[1,0],[-1,-1],[1,1],[1,-1],[-1,1]];
+    neighbors = neighbors.filter((loc) => {
+      loc[0] += row;
+      loc[1] += col;
+      return loc[0] >= 0 && loc[1] >= 0;
+    });
+
+    return neighbors;
+  }
+
+  // the game of life begins
   execGame = () => {
     let start = setInterval(() => {
       let board = this.state.board;
+      console.log(this.countNeighbors(0, 0));
+      //iterate through board and make transition
+      board = board.map((row, rIndex) => {
+        return row.map((cell, cIndex) => {
+          if (cell === 1) {
+
+          }
+        });
+      });
+
       let generation = this.state.generation + 1;
       this.setState(()=> {
         return {generation: generation}
