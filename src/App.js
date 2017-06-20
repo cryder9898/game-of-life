@@ -134,7 +134,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="App-header">
-          <h2>Game of Life</h2>
+          <h2>Game of Life in React.js</h2>
         </div>
         <div>
           <TopPanel
