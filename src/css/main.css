@@ -19,7 +19,7 @@ body {
 
 .board {
   margin: 0 auto;
-  max-width: 21em; }
+  max-width: 3.5em; }
 
 .dead, .alive {
   float: left;

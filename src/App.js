@@ -15,8 +15,8 @@ class App extends Component {
   }
 
   createBoard = () => {
-    const cols = 20;  // # of columns
-    const rows = 30;  // # of rows
+    const cols = 5;  // # of columns
+    const rows = 5;  // # of rows
     let board = [];
     for (let i = 0; i < cols; i++) {
       let row = [];
@@ -42,7 +42,7 @@ class App extends Component {
   randomizeLife = (board) => {
     const cLen = board.length;
     const rLen = board[0].length;
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < cLen * rLen; i++) {
       let cols = this.getRndInteger(0, cLen);
       //console.log('Col: ', cols);
       let rows = this.getRndInteger(0, rLen);
@@ -58,28 +58,35 @@ class App extends Component {
     this.setState({board: board});
   }
 
-  countNeighbors = (row, col) => {
+  getLiveNeighbors = (row, col) => {
     let count = 0;
     let neighbors = [[0,-1],[0,1],[-1,0],[1,0],[-1,-1],[1,1],[1,-1],[-1,1]];
+    //finds neighbors
     neighbors = neighbors.filter((loc) => {
-      loc[0] += row;
+      loc[0] += row
       loc[1] += col;
-      return loc[0] >= 0 && loc[1] >= 0;
+      return loc[0] >= 0 && loc[1] >= 0 && loc[0] < this.state.board.length && loc[1] < this.state.board[0].length;
     });
 
-    return neighbors;
+    neighbors = neighbors.filter((loc)=> {
+      return this.state.board[loc[0]][loc[1]] === 1;
+    });
+
+    return neighbors.length;
   }
 
   // the game of life begins
   execGame = () => {
     let start = setInterval(() => {
       let board = this.state.board;
-      console.log(this.countNeighbors(0, 0));
+
       //iterate through board and make transition
       board = board.map((row, rIndex) => {
         return row.map((cell, cIndex) => {
-          if (cell === 1) {
 
+          if (cell === 1) {
+            let liveNeighbors = this.getLiveNeighbors(rIndex, cIndex);
+            console.log('at Loc: ' + rIndex + "," + cIndex + ' there are ' + liveNeighbors + ' living neighbors');
           }
         });
       });
