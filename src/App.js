@@ -15,8 +15,8 @@ class App extends Component {
   }
 
   createBoard = () => {
-    const cols = 5;  // # of columns
-    const rows = 5;  // # of rows
+    const cols = 40;  // # of columns
+    const rows = 40;  // # of rows
     let board = [];
     for (let i = 0; i < cols; i++) {
       let row = [];
@@ -29,9 +29,11 @@ class App extends Component {
   }
 
   reset = () => {
+    if (this.state.play) {
+      clearInterval(this.state.play);
+    }
     let board = this.createBoard();
-    this.randomizeLife(board);
-    this.setState({board: board, generation: 0});
+    this.setState({board: board, generation: 0, play: null});
   }
 
   //returns an integer between min and max, excluding max number
@@ -42,7 +44,7 @@ class App extends Component {
   randomizeLife = (board) => {
     const cLen = board.length;
     const rLen = board[0].length;
-    for (let i = 0; i < cLen * rLen; i++) {
+    for (let i = 0; i < cLen * 10; i++) {
       let cols = this.getRndInteger(0, cLen);
       //console.log('Col: ', cols);
       let rows = this.getRndInteger(0, rLen);
@@ -59,43 +61,62 @@ class App extends Component {
   }
 
   getLiveNeighbors = (row, col) => {
-    let count = 0;
     let neighbors = [[0,-1],[0,1],[-1,0],[1,0],[-1,-1],[1,1],[1,-1],[-1,1]];
     //finds neighbors
     neighbors = neighbors.filter((loc) => {
-      loc[0] += row
+      loc[0] += row;
       loc[1] += col;
-      return loc[0] >= 0 && loc[1] >= 0 && loc[0] < this.state.board.length && loc[1] < this.state.board[0].length;
+      return loc[0] >= 0 && loc[1] >= 0 && loc[0] < this.state.board.length && loc[1] < this.state.board[0].length && this.state.board[loc[0]][loc[1]] === 1;
     });
-
-    neighbors = neighbors.filter((loc)=> {
-      return this.state.board[loc[0]][loc[1]] === 1;
-    });
-
     return neighbors.length;
   }
 
   // the game of life begins
   execGame = () => {
     let start = setInterval(() => {
+      console.log('Generation: ', this.state.generation);
       let board = this.state.board;
 
-      //iterate through board and make transition
+      //iterate through board and make a generation
       board = board.map((row, rIndex) => {
         return row.map((cell, cIndex) => {
 
+          let liveNeighbors = this.getLiveNeighbors(rIndex, cIndex);
+
+          console.log('at Loc: ' + rIndex + "," + cIndex + ' there are ' + liveNeighbors + ' living neighbors');
+
           if (cell === 1) {
-            let liveNeighbors = this.getLiveNeighbors(rIndex, cIndex);
-            console.log('at Loc: ' + rIndex + "," + cIndex + ' there are ' + liveNeighbors + ' living neighbors');
+            // Alive Cell
+
+            // Any live cell with fewer than two live neighbours dies, as if caused by underpopulation
+            if (liveNeighbors < 2 ) {
+              return 0;
+            }
+
+            // Any live cell with more than three live neighbours dies, as if by overpopulation.
+            if (liveNeighbors > 3) {
+              return 0;
+            }
+
+            return 1;
+          } else {
+            // Dead cell
+
+            if (liveNeighbors === 3) {
+              //ITS ALIVE!!!
+              return 1;
+            }
+
+            return 0;
           }
-        });
-      });
+        }); // inner map
+      }); // outter map
 
       let generation = this.state.generation + 1;
-      this.setState(()=> {
-        return {generation: generation}
-      });
-    }, 200);
+      this.setState({generation: generation, board: board});
+
+    }, 50); // end of setInterval()
+
     this.setState({play: start});
   }
 
@@ -118,7 +139,7 @@ class App extends Component {
         <div>
           <TopPanel
             gen={this.state.generation}
-            onReset={this.reset}
+            onClear={this.reset}
             onPause={this.pause}
             execGame={this.execGame}
           />

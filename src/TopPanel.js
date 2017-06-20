@@ -1,8 +1,8 @@
 import React from 'react';
 
-const TopPanel = ({onReset, onPause, execGame, gen}) => {
-  const handleReset = () => {
-    onReset();
+const TopPanel = ({onClear, onPause, execGame, gen}) => {
+  const handleClear = () => {
+    onClear();
   }
 
   const playGame = () => {
@@ -17,7 +17,7 @@ const TopPanel = ({onReset, onPause, execGame, gen}) => {
     <div className='top-panel'>
       <button onClick={playGame}>Play</button>
       <button onClick={handlePause}>Pause</button>
-      <button onClick={handleReset}>Reset</button>
+      <button onClick={handleClear}>Clear</button>
       Generations: {gen}
     </div>
   );

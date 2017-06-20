@@ -23,7 +23,6 @@ const Cell = ({swap, loc, isAlive}) => {
 Cell.propTypes = {
   swap: PropTypes.func.isRequired,
   loc: PropTypes.array.isRequired,
-  isAlive: PropTypes.number.isRequired,
 }
 
 export default Cell;
