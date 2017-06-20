@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TopPanel = ({onClear, onPause, execGame, gen}) => {
   const handleClear = () => {
@@ -22,5 +23,12 @@ const TopPanel = ({onClear, onPause, execGame, gen}) => {
     </div>
   );
 };
+
+TopPanel.propTypes = {
+  onClear: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  execGame: PropTypes.func.isRequired,
+  gen: PropTypes.number.isRequired,
+}
 
 export default TopPanel;

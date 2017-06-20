@@ -145,7 +145,6 @@ class App extends Component {
           />
           <GameBoard
             switchCell={this.switchCell}
-            isRunning={this.state.play}
             board={this.state.board}
           />
         </div>

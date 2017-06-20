@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Cell from './Cell';
 
-const GameBoard = ({switchCell, isRunning, board}) => {
+const GameBoard = ({switchCell, board}) => {
 
   // swap dead and alive cells on board
   const swap = (css, loc) => {
@@ -12,17 +13,17 @@ const GameBoard = ({switchCell, isRunning, board}) => {
     } else {
       switchCell(i, j, 1);
     }
-  } 
+  }
 
   return (
     <div className='board'>
       {board.map((row, i) => {
-        return row.map((col, j) => {
+        return row.map((cell, j) => {
           return (
             <Cell
               key={[i, j]}
               loc={[i, j]}
-              isAlive={board[i][j]}
+              isAlive={cell}
               swap={swap}
             />
           );
@@ -30,6 +31,11 @@ const GameBoard = ({switchCell, isRunning, board}) => {
       })}
     </div>
   );
+}
+
+GameBoard.propTypes = {
+  switchCell: PropTypes.func.isRequired,
+  board: PropTypes.array.isRequired,
 }
 
 export default GameBoard;
