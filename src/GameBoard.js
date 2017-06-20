@@ -12,12 +12,12 @@ const GameBoard = ({switchCell, isRunning, board}) => {
     } else {
       switchCell(i, j, 1);
     }
-  }
+  } 
 
   return (
     <div className='board'>
-      {board.map((col, i) => {
-        return col.map((row, j) => {
+      {board.map((row, i) => {
+        return row.map((col, j) => {
           return (
             <Cell
               key={[i, j]}

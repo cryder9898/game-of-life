@@ -9,7 +9,7 @@ class App extends Component {
     this.randomizeLife(board);
     this.state = {
       board: board,
-      play: false,
+      play: null,
       generation: 0,
     }
   }
@@ -59,6 +59,27 @@ class App extends Component {
     this.setState({board: board});
   }
 
+  execGame = () => {
+    let start = setInterval(() => {
+      let board = this.state.board;
+      let generation = this.state.generation + 1;
+      this.setState(()=> {
+        return {generation: generation}
+      });
+    }, 200);
+    this.setState({play: start});
+  }
+
+  componentWillUnMount() {
+    this.pause();
+  }
+
+  pause = () => {
+    this.state.play && clearInterval(this.state.play);
+  }
+
+
+
   render() {
     return (
       <div className="app">
@@ -67,7 +88,10 @@ class App extends Component {
         </div>
         <div>
           <TopPanel
+            gen={this.state.generation}
             onReset={this.reset}
+            onPause={this.pause}
+            execGame={this.execGame}
           />
           <GameBoard
             switchCell={this.switchCell}
